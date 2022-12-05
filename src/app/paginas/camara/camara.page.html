@@ -1,0 +1,13 @@
+<ion-header>
+  <ion-toolbar color="success">
+    <ion-title>Lector Qr</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [style.visibility]="content_visibility">
+  <ion-button expand="block" class="ion-margin" (click)="startScan()">Escanear codigo QR</ion-button>
+
+  <ion-item *ngIf="scannedResult">
+    <ion-label class="ion-text-wrap">Resultado QR: {{scannedResult}}</ion-label>
+  </ion-item>
+</ion-content>

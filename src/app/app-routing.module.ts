@@ -10,7 +10,11 @@ const routes: Routes = [
   {
     path:'login',
     loadChildren:()=>import('./paginas/login/login.module').then(m=>m.LoginPageModule)
+  },  {
+    path: 'camara',
+    loadChildren: () => import('./paginas/camara/camara.module').then( m => m.CamaraPageModule)
   }
+
 ];
 @NgModule({
   imports: [
