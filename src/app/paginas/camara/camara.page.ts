@@ -13,7 +13,18 @@ export class CamaraPage implements OnDestroy {
   constructor() { }
 
 
-  async checkPermission(){
+  checkPermission = async () => {
+    // check or request permission
+    const status = await BarcodeScanner.checkPermission({ force: true });
+
+    if (status.granted) {
+      // the user granted permission
+      return true;
+    }
+
+    return false;
+  };
+  /*async checkPermission(){
     try{
       const status = await BarcodeScanner.checkPermission({force:true});
       if(status.granted){
@@ -23,9 +34,25 @@ export class CamaraPage implements OnDestroy {
     }catch(e){
       console.log(e);
     }
-  }
+  }*/
 
-  async startScan(){
+  startScan = async () => {
+    // Check camera permission
+    // This is just a simple example, check out the better checks below
+    await BarcodeScanner.checkPermission({ force: true });
+
+    // make background of WebView transparent
+    // note: if you are using ionic this might not be enough, check below
+    BarcodeScanner.hideBackground();
+
+    const result = await BarcodeScanner.startScan(); // start scanning and wait for a result
+
+    // if the result has content
+    if (result.hasContent) {
+      console.log(result.content); // log the raw scanned content
+    }
+  };
+  /*async startScan(){
     try{
       const permission=await this.checkPermission();
       if(!permission){
@@ -49,15 +76,19 @@ export class CamaraPage implements OnDestroy {
       console.log(e);
       this.stopScan();
     }
-  }
+  }*/
 
-  stopScan(){
+  /*stopScan(){
 
     BarcodeScanner.showBackground();
     BarcodeScanner.stopScan();
     document.querySelector('body')?.classList.remove('scanner-active');
     this.content_visibility='';
-  }
+  }*/
+  stopScan = () => {
+    BarcodeScanner.showBackground();
+    BarcodeScanner.stopScan();
+  };
 
   ngOnDestroy(): void {
     this.stopScan();
