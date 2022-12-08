@@ -7,7 +7,8 @@ import { IonicModule } from '@ionic/angular';
 import { CamaraPageRoutingModule } from './camara-routing.module';
 
 import { CamaraPage } from './camara.page';
-import { QRCodeModule } from 'angularx-qrcode';
+import { QrCodeModule } from 'ng-qrcode';
+//import {} from '@ionic-native/barcode-scanner/ngx';
 
 @NgModule({
   imports: [
@@ -15,7 +16,7 @@ import { QRCodeModule } from 'angularx-qrcode';
     FormsModule,
     IonicModule,
     CamaraPageRoutingModule,
-    QRCodeModule
+    QrCodeModule
   ],
   declarations: [CamaraPage]
 })

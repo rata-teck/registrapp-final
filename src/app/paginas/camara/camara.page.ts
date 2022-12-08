@@ -1,15 +1,17 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import { Component } from '@angular/core';
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner/dist/esm';
 
 @Component({
   selector: 'app-camara',
   templateUrl: './camara.page.html',
   styleUrls: ['./camara.page.scss'],
 })
-export class CamaraPage implements OnDestroy {
+export class CamaraPage{
 
   scannedResult:any;
   content_visibility='';
+
+  data : any;
   constructor() { }
 
 
@@ -78,17 +80,18 @@ export class CamaraPage implements OnDestroy {
     }
   }*/
 
-  /*stopScan(){
+  stopScan(){
 
     BarcodeScanner.showBackground();
     BarcodeScanner.stopScan();
     document.querySelector('body')?.classList.remove('scanner-active');
     this.content_visibility='';
-  }*/
+  }
+  /*
   stopScan = () => {
     BarcodeScanner.showBackground();
     BarcodeScanner.stopScan();
-  };
+  };*/
 
   ngOnDestroy(): void {
     this.stopScan();
