@@ -13,11 +13,20 @@ const routes: Routes = [
   {
     path: 'camara',
     loadChildren: () => import('./paginas/camara/camara.module').then( m => m.CamaraPageModule)
+  },
+  {
+    path: 'confirmar',
+    loadChildren: () => import('./paginas/confirmar/confirmar.module').then( m => m.ConfirmarPageModule)
+  },
+  {
+    path: 'exito',
+    loadChildren: () => import('./paginas/exito/exito.module').then( m => m.ExitoPageModule)
   }
+
 ];
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
+    RouterModule.forRoot(routes)
   ],
   exports: [RouterModule]
 })

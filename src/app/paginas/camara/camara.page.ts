@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
-import { BarcodeScanner } from '@capacitor-community/barcode-scanner/dist/esm';
+import { Component} from '@angular/core';
+import { BarcodeScanner } from '@capacitor-community/barcode-scanner';
+import {PuenteService} from './../../servicios/puente.service';
+import {FormBuilder, FormControl, Validators} from '@angular/forms';
+import {Router} from '@angular/router';
+import { delay } from 'rxjs';
 
 @Component({
   selector: 'app-camara',
@@ -12,7 +16,55 @@ export class CamaraPage{
   content_visibility='';
 
   data : any;
-  constructor() { }
+
+  public urlIn = new FormControl('', [Validators.required, Validators.minLength(27), Validators.maxLength(32)]);
+  public fechaIn = new FormControl(0, [Validators.required, Validators.min(1583031600)]); // 1583031600 == 1 de marzo de 2020 a medianoche
+  public asignaturaIn = new FormControl('', [Validators.required, Validators.minLength(12), Validators.maxLength(12)]);
+
+  private urlOut : string = '';
+  private fechaOut : number = 0;
+  private asignaturaOut : string = '';
+  constructor(
+    public datos : PuenteService,
+    public fb : FormBuilder,
+    private ruta : Router
+  ) { }
+
+
+  public accesoManual() : void{
+    // Parseo de nulos (NO ES UNA PROTECCIÓN, las protecciones están como validaciones de entrada)
+    if(this.urlIn.value === null){
+      this.urlOut = ''
+    }
+    else{
+      this.urlOut = this.urlIn.value;
+    }
+
+    if(this.fechaIn.value === null){
+      this.fechaOut = 0;
+    }
+    else{
+      this.fechaOut = this.fechaIn.value;
+    }
+
+    if(this.asignaturaIn.value === null){
+      this.asignaturaOut = '';
+    }
+    else{
+      this.asignaturaOut = this.asignaturaIn.value;
+    }
+
+    // Dejalo pensar un segundo
+    delay(1000);
+
+    // Escritura de datos
+    this.datos.qrData.url = this.urlOut;
+    this.datos.qrData.fecha = this.fechaOut;
+    this.datos.qrData.asignatura = this.asignaturaOut;
+
+    // Ahora preguntemos al usuario quién es
+    this.ruta.navigateByUrl('/login');
+  }
 
 
   checkPermission = async () => {

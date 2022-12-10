@@ -31,9 +31,9 @@ export class PuenteService {
   }
 
   public qrData = {
-    "url" : "",
-    "fecha" : 0,
-    "asignatura" : ""
+    url : "",
+    fecha : 0,
+    asignatura : ""
   }
 
   public iniciarSesion(correo : string, clave : string) : void{
