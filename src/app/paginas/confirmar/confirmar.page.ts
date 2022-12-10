@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import {Router} from '@angular/router';
+import {PuenteService} from './../../servicios/puente.service';
 
 @Component({
   selector: 'app-confirmar',
@@ -7,6 +9,14 @@ import { Component } from '@angular/core';
 })
 export class ConfirmarPage {
 
-  constructor() { }
+  constructor(
+    public datos : PuenteService,
+    private ruta : Router
+  ) { }
+
+  public listo() : void{
+    this.datos.registrarAsistencia();
+    this.ruta.navigateByUrl('/exito');
+  }
 
 }

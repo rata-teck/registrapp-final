@@ -11,6 +11,7 @@ import { QrCodeModule } from 'ng-qrcode';
 //import {} from '@ionic-native/barcode-scanner/ngx';
 import {PuenteService} from './../../servicios/puente.service';
 import {RouterModule} from '@angular/router';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import {RouterModule} from '@angular/router';
     CamaraPageRoutingModule,
     QrCodeModule,
     ReactiveFormsModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   declarations: [CamaraPage],
   providers:[PuenteService]

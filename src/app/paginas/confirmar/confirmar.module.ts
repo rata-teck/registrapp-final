@@ -9,13 +9,15 @@ import { ConfirmarPageRoutingModule } from './confirmar-routing.module';
 import { ConfirmarPage } from './confirmar.page';
 import {HttpClientModule} from '@angular/common/http';
 import {PuenteService} from './../../servicios/puente.service';
+import {RouterModule} from '@angular/router';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    ConfirmarPageRoutingModule
+    ConfirmarPageRoutingModule,
+    RouterModule
   ],
   declarations: [ConfirmarPage],
   providers: [PuenteService]

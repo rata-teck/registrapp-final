@@ -37,6 +37,7 @@ export class PuenteService {
   }
 
   public iniciarSesion(correo : string, clave : string) : void{
+    console.log('url: '+this.qrData.url)
     this.cliente.get<Alumno>(this.qrData.url + '/alumnos/'+correo).subscribe(data => {
       if(data.clave == clave){
         this.alumno = {...data}
