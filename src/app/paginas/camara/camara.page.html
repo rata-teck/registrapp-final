@@ -6,10 +6,6 @@
 
 <ion-content [style.visibility]="content_visibility">
   <ion-button expand="block" class="ion-margin" (click)="startScan()">Escanear codigo QR</ion-button>
-
-  <ion-item *ngIf="scannedResult">
-    <ion-label class="ion-text-wrap">Resultado QR: {{data}}</ion-label>
-  </ion-item>
   <ion-card *ngIf="!scannedResult">
     <ion-card-header>
       <ion-title>O acceda manualmente</ion-title>

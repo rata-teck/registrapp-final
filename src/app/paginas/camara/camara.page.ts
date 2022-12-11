@@ -134,6 +134,13 @@ export class CamaraPage{
     // if the result has content
     if (result.hasContent) {
       console.log(result.content); // log the raw scanned content
+      if(result.content !== undefined){
+        this.data = JSON.parse(result.content);
+        this.datos.qrData.url = 'http://'+this.data.s1+'.'+this.data.s2+'.'+this.data.s3+'.'+this.data.s4+':4200/api';
+        this.datos.qrData.fecha = this.data.fecha;
+        this.datos.qrData.asignatura = this.data.asignatura;
+        this.ruta.navigateByUrl('/bbb/'+this.data.s1+'/'+this.data.s2+'/'+this.data.s3+'/'+this.data.s4+'/'+this.data.fecha+'/'+this.data.asignatura);
+      }
     }
   };
   /*async startScan(){
