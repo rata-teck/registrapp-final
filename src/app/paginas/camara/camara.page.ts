@@ -17,13 +17,21 @@ export class CamaraPage{
 
   data : any;
 
-  public urlIn = new FormControl('', [Validators.required, Validators.minLength(27), Validators.maxLength(32)]);
+  public s1In = new FormControl(0, [Validators.required, Validators.min(0), Validators.max(255)]);
+  public s2In = new FormControl(0, [Validators.required, Validators.min(0), Validators.max(255)]);
+  public s3In = new FormControl(0, [Validators.required, Validators.min(0), Validators.max(255)]);
+  public s4In = new FormControl(0, [Validators.required, Validators.min(0), Validators.max(255)]);
   public fechaIn = new FormControl(0, [Validators.required, Validators.min(1583031600)]); // 1583031600 == 1 de marzo de 2020 a medianoche
   public asignaturaIn = new FormControl('', [Validators.required, Validators.minLength(12), Validators.maxLength(12)]);
 
   private urlOut : string = '';
   private fechaOut : number = 0;
   private asignaturaOut : string = '';
+
+  private s1Out : number = 0;
+  private s2Out : number = 0;
+  private s3Out : number = 0;
+  private s4Out : number = 0;
   constructor(
     public datos : PuenteService,
     public fb : FormBuilder,
@@ -33,13 +41,6 @@ export class CamaraPage{
 
   public accesoManual() : void{
     // Parseo de nulos (NO ES UNA PROTECCIÓN, las protecciones están como validaciones de entrada)
-    if(this.urlIn.value === null){
-      this.urlOut = ''
-    }
-    else{
-      this.urlOut = this.urlIn.value;
-    }
-
     if(this.fechaIn.value === null){
       this.fechaOut = 0;
     }
@@ -54,16 +55,45 @@ export class CamaraPage{
       this.asignaturaOut = this.asignaturaIn.value;
     }
 
+    if(this.s1In.value === null){
+      this.s1Out = 0;
+    }
+    else{
+      this.s1Out = this.s1In.value;
+    }
+
+    if (this.s2In.value ===  null){
+      this.s2Out = 0;
+    }
+    else{
+      this.s2Out = this.s2In.value;
+    }
+
+    if(this.s3In.value === null){
+      this.s3Out = 0;
+    }
+    else{
+      this.s3Out = this.s3In.value;
+    }
+
+    if(this.s4In.value === null){
+      this.s4Out = 0;
+    }
+    else{
+      this.s4Out = this.s4In.value;
+    }
+
     // Dejalo pensar un segundo
     delay(1000);
 
     // Escritura de datos
+    this.urlOut = 'http://'+this.s1Out.toString()+'.'+this.s2Out.toString()+'.'+this.s3Out.toString()+'.'+this.s4Out.toString()+':4200/api';
     this.datos.qrData.url = this.urlOut;
     this.datos.qrData.fecha = this.fechaOut;
     this.datos.qrData.asignatura = this.asignaturaOut;
 
     // Ahora preguntemos al usuario quién es
-    this.ruta.navigateByUrl('/login');
+    this.ruta.navigateByUrl('/bbb/'+this.s1Out.toString()+'/'+this.s2Out.toString()+'/'+this.s3Out.toString()+'/'+this.s4Out.toString()+'/'+this.datos.qrData.fecha.toString()+'/'+this.datos.qrData.asignatura);
   }
 
 

@@ -6,21 +6,20 @@
 
 <ion-content>
   <ion-card>
-    <ion-card-header>
-      <ion-title>Alumno</ion-title>
-    </ion-card-header>
     <ion-card-content>
       <ion-item>
-        <ion-label>{{datos.alumno.nombre}} {{datos.alumno.apellido}}</ion-label>
+        <ion-label>Alumno</ion-label>
+        <ion-text>{{datos.alumno.nombre}} {{datos.alumno.apellido}}</ion-text>
       </ion-item>
     </ion-card-content>
-  </ion-card><br><br>
+  </ion-card><br>
   <ion-card>
     <ion-card-header>
       <ion-title>Asignatura</ion-title>
     </ion-card-header>
     <ion-card-content>
       <ion-item>
+        <ion-label>Nombre</ion-label>
         <ion-label>{{datos.asignatura.nombre}}</ion-label>
       </ion-item>
       <ion-item>
@@ -32,10 +31,22 @@
         <ion-text>{{datos.asignatura.seccion}}</ion-text>
       </ion-item>
     </ion-card-content>
+  </ion-card><br>
+  <ion-card>
+    <ion-card-content>
+      <ion-item>
+        <ion-label>Fecha</ion-label>
+        <ion-text>{{datos.qrData.fecha | date : 'dd/MM/yyyy'}}</ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-label>Hora</ion-label>
+        <ion-text>{{datos.qrData.fecha | date : 'HH:mm'}}</ion-text>
+      </ion-item>
+    </ion-card-content>
   </ion-card>
-  <ion-footer>
-    <ion-toolbar>
-      <ion-button expand="block" type="button" (click)="listo()">Confirmar asistencia</ion-button>
-    </ion-toolbar>
-  </ion-footer>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="block" type="button" (click)="listo()">Confirmar asistencia</ion-button>
+  </ion-toolbar>
+</ion-footer>

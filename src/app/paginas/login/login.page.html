@@ -9,14 +9,14 @@
     <ion-card-content>
         <ion-item>
           <ion-label position="floating">Correo</ion-label>
-          <ion-input type="email" [formControl]="correoIn"></ion-input>
+          <ion-input type="text" [formControl]="usuarioIn"></ion-input>
         </ion-item>
         <ion-item>
           <ion-label position="floating">Contraseña</ion-label>
           <ion-input type="password" [formControl]="claveIn"></ion-input>
         </ion-item>
       <br>
-      <ion-button type="button" (click)="iniciarSesion()" expand="block" [disabled]="correoIn.invalid || claveIn.invalid">Ingresar</ion-button>
+      <ion-button type="button" (click)="iniciarSesion()" expand="block" [disabled]="usuarioIn.invalid || claveIn.invalid">Ingresar</ion-button>
     </ion-card-content>
   </ion-card>
 </ion-content>

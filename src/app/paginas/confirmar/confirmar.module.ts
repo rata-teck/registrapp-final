@@ -17,7 +17,8 @@ import {RouterModule} from '@angular/router';
     FormsModule,
     IonicModule,
     ConfirmarPageRoutingModule,
-    RouterModule
+    RouterModule,
+    HttpClientModule
   ],
   declarations: [ConfirmarPage],
   providers: [PuenteService]

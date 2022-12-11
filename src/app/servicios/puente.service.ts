@@ -46,6 +46,13 @@ export class PuenteService {
     this.buscarAsignatura();
   }
 
+  public comprobarSesion(correo : string) : void{
+    this.cliente.get<Alumno>(this.qrData.url+'/alumnos/'+correo).subscribe(data => {
+      this.alumno = {...data}
+    });
+    this.buscarAsignatura();
+  }
+
   public buscarAsignatura() : void{
     this.cliente.get<Asignatura>(this.qrData.url+'/asignaturas/'+this.qrData.asignatura).subscribe(data => {
       for(let x of data.alumnos){
