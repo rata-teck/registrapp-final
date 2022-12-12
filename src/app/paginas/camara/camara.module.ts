@@ -7,7 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { CamaraPageRoutingModule } from './camara-routing.module';
 
 import { CamaraPage } from './camara.page';
-import { QrCodeModule } from 'ng-qrcode';
+//import { QrCodeModule } from 'ng-qrcode';
 //import {} from '@ionic-native/barcode-scanner/ngx';
 import {PuenteService} from './../../servicios/puente.service';
 import {RouterModule} from '@angular/router';
@@ -19,7 +19,7 @@ import {HttpClientModule} from '@angular/common/http';
     FormsModule,
     IonicModule,
     CamaraPageRoutingModule,
-    QrCodeModule,
+    //QrCodeModule,
     ReactiveFormsModule,
     RouterModule,
     HttpClientModule
