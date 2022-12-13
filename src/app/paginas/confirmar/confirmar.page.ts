@@ -24,7 +24,7 @@ export class ConfirmarPage implements OnInit {
     const asignatura1 = this.ruta.snapshot.params["asignatura"];
     const alumno1 = this.ruta.snapshot.params["alumno"];
 
-    const url1 : string = 'http://'+s1+'.'+s2+'.'+s3+'.'+s4+':4200/api';
+    const url1 : string = 'https://'+s1+'.'+s2+'.'+s3+'.'+s4+':4200/api';
 
     this.datos.qrData = {url: url1, fecha: fecha1, asignatura: asignatura1}
     delay(200);

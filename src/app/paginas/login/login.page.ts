@@ -36,7 +36,7 @@ export class LoginPage implements OnInit{
     this.s3 = this.ruta.snapshot.params['s3'];
     this.s4 = this.ruta.snapshot.params['s4'];
 
-    const url = 'http://'+this.s1.toString()+'.'+this.s2.toString()+'.'+this.s3.toString()+'.'+this.s4.toString()+':4200/api';
+    const url = 'https://'+this.s1.toString()+'.'+this.s2.toString()+'.'+this.s3.toString()+'.'+this.s4.toString()+':4200/api';
     this.datos.qrData = {url: url, fecha: fecha1, asignatura : a1}
   }
 

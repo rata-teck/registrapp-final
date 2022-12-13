@@ -87,7 +87,7 @@ export class CamaraPage{
     delay(1000);
 
     // Escritura de datos
-    this.urlOut = 'http://'+this.s1Out.toString()+'.'+this.s2Out.toString()+'.'+this.s3Out.toString()+'.'+this.s4Out.toString()+':4200/api';
+    this.urlOut = 'https://'+this.s1Out.toString()+'.'+this.s2Out.toString()+'.'+this.s3Out.toString()+'.'+this.s4Out.toString()+':4200/api';
     this.datos.qrData.url = this.urlOut;
     this.datos.qrData.fecha = this.fechaOut;
     this.datos.qrData.asignatura = this.asignaturaOut;
