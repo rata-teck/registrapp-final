@@ -7,7 +7,7 @@ const routes: Routes = [
     loadChildren: () => import('./paginas/portada/portada.module').then( m => m.PortadaPageModule)
   },
   {
-    path:'bbb/:s1/:s2/:s3/:s4/:fecha/:asignatura',
+    path:'bbb/:fecha/:asignatura',
     loadChildren:()=>import('./paginas/login/login.module').then(m=>m.LoginPageModule)
   },
   {
@@ -15,7 +15,7 @@ const routes: Routes = [
     loadChildren: () => import('./paginas/camara/camara.module').then( m => m.CamaraPageModule)
   },
   {
-    path: 'ccc/:s1/:s2/:s3/:s4/:fecha/:asignatura/:alumno',
+    path: 'ccc/:fecha/:asignatura/:alumno',
     loadChildren: () => import('./paginas/confirmar/confirmar.module').then( m => m.ConfirmarPageModule)
   },
   {

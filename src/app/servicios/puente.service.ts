@@ -1,15 +1,14 @@
 import { Injectable } from '@angular/core';
-import {Alumno} from './../modelos/alumno';
+import {Alumno, Asistencia} from './../modelos/alumno';
 import {Asignatura} from './../modelos/asignatura';
-import {HttpClient} from '@angular/common/http';
-import { delay } from 'rxjs';
+import {AngularFirestore} from '@angular/fire/compat/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PuenteService {
 
-  constructor(private cliente : HttpClient) { }
+  constructor(private db : AngularFirestore) { }
 
   public alumno : Alumno = {
     nombre : '',
@@ -18,8 +17,7 @@ export class PuenteService {
     clave : '',
     edad : 0,
     genero : 'Masculino',
-    carrera : '',
-    asistencias : []
+    carrera : ''
   }
 
   public asignatura : Asignatura = {
@@ -31,43 +29,62 @@ export class PuenteService {
   }
 
   public qrData = {
-    url : "",
     fecha : 0,
     asignatura : ""
   }
 
-  public iniciarSesion(correo : string, clave : string) : void{
-    console.log('url: '+this.qrData.url)
-    this.cliente.get<Alumno>(this.qrData.url + '/alumnos/'+correo).subscribe(data => {
-      if(data.clave == clave){
-        this.alumno = {...data}
+  public asistencia : Asistencia = {
+    alumno : '',
+    asignatura : '',
+    estado : 'Ausente',
+    fecha : 0
+  }
+
+  public iniciarSesion(id : string, clave : string) : void{
+    this.db.doc<Alumno>('alumnos/'+id).get().subscribe(data => {
+      const d2 = data.data();
+      if(d2 !== undefined){
+        if(d2.clave == clave){
+          this.alumno = d2;
+          this.alumno.id = data.id;
+        }
       }
     });
     this.buscarAsignatura();
   }
 
-  public comprobarSesion(correo : string) : void{
-    this.cliente.get<Alumno>(this.qrData.url+'/alumnos/'+correo).subscribe(data => {
-      this.alumno = {...data}
-    });
+  public comprobarSesion(id : string) : void{
+    this.db.doc<Alumno>('alumnos/'+ id).get().subscribe(data => {
+      const d2 = data.data();
+      if(d2 !== undefined){
+        this.alumno = d2;
+        this.alumno.id = data.id;
+      }
+    })
     this.buscarAsignatura();
   }
 
   public buscarAsignatura() : void{
-    this.cliente.get<Asignatura>(this.qrData.url+'/asignaturas/'+this.qrData.asignatura).subscribe(data => {
-      for(let x of data.alumnos){
-        if(this.alumno.id == x){
-          this.asignatura = {...data}
+    this.db.doc<Asignatura>('asignaturas/'+this.qrData.asignatura).get().subscribe(data => {
+      const d2 = data.data();
+      if(d2 !== undefined){
+        for(let x of d2.alumnos){
+          if(x == this.alumno.id){
+            this.asignatura = d2;
+            this.asignatura.id = data.id;
+          }
         }
       }
     });
   }
 
   public registrarAsistencia():void{
-    this.alumno.asistencias.push({asignatura : this.asignatura.id, estado : 'Presente', fecha : this.qrData.fecha});
-    delay(200);
-    this.cliente.put(this.qrData.url+'/alumnos/'+this.alumno.id, {...this.alumno}, {headers:{'Content-Type':'application/json; charset=utf-8'}}).subscribe(data => {
-      console.log(this.alumno.apellido+' presente');
-    });
+    this.asistencia = {
+      alumno : this.alumno.id,
+      asignatura : this.asignatura.id,
+      estado : 'Presente',
+      fecha : this.qrData.fecha
+    }
+    this.db.collection('asistencias').add({...this.asistencia});
   }
 }
